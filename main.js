@@ -3,14 +3,13 @@ phina.globalize();
 
 var ASSETS = {
   image: {
-
     tomapiko: 'http://cdn.rawgit.com/phi-jp/phina.js/v0.2.0/assets/images/tomapiko_ss.png',
   },
 };
 
 
 
-var SCREEN_WIDTH    = 700;
+var SCREEN_WIDTH    = 640;
 var SCREEN_HEIGHT   = 300;
 
 var PIKO_Y          = 250;
@@ -29,7 +28,6 @@ phina.define("MainScene", {
 
     this.superInit();
 
-    // this.canvas.style.left= "100px";
     this.backgroundColor = '#34a853';
     this.piko = Sprite('tomapiko', 64, 64).addChildTo(this);
     this.piko.setPosition(100, PIKO_Y);
@@ -40,37 +38,38 @@ phina.define("MainScene", {
     this.wordGroup = DisplayElement().addChildTo(this);
   },
 
-  createWord: function() {
-    var ascii = [48];
-    var ch = String.fromCharCode(ascii.pickup());
+  // createWord: function() {
+  //   var ascii = [48];
+  //   var ch = String.fromCharCode(ascii.pickup());
+  //
+  //   var word = Word().addChildTo(this.wordGroup);
+  //   word.x = Math.randint(PIECE_SIZE_HALF, this.gridX.width-PIECE_SIZE_HALF);
+  //   word.y = -100;
+  //
+  //   return word;
+  // },
 
-    var word = Word().addChildTo(this.wordGroup);
-    word.x = Math.randint(PIECE_SIZE_HALF, this.gridX.width-PIECE_SIZE_HALF);
-    word.y = -100;
-
-    return word;
-  },
-
-  checkHit: function() {
-    var piko = this.piko;
-
-    this.wordGroup.children.some(function(word) {
-
-      if (piko.hitTestElement(word)) {
-        console.log("hit!!!");
-        word.disappear();
-        return true;
-      }
-    }, this);
-  },
+  // checkHit: function() {
+  //   var piko = this.piko;
+  //
+  //   this.wordGroup.children.some(function(word) {
+  //
+  //     if (piko.hitTestElement(word)) {
+  //       console.log("hit!!!");
+  //       word.disappear();
+  //       return true;
+  //     }
+  //   }, this);
+  // },
 
   update: function(app) {
 
-    this.checkHit();
+    // this.checkHit();
+
     // dropWord
-    if (app.frame % 16 === 0) {
-      this.createWord();
-    }
+    // if (app.frame % 16 === 0) {
+    //   this.createWord();
+    // }
 
     var piko = this.piko;
     var e = app.keyboard;
@@ -137,43 +136,32 @@ phina.define("MainScene", {
 
   }
 
-
 });
 
-phina.define('Word', {
-  superClass: 'Button',
-
-  init: function() {
-    this.superInit({
-      width: PIECE_SIZE,
-      height: PIECE_SIZE,
-      text: ''
-    });
-    this.enable = true;
-  },
-
-  update: function() {
-    this.y += 8;
-
-    if (this.y > 960) {
-      this.remove();
-    }
-  },
-
-  disappear: function() {
-    this.remove();
-    // this.enable = false;
-    // this.tweener
-    //   .to({
-    //     scaleX: 2,
-    //     scaleY: 2,
-    //     alpha: 0,
-    //   }, 250)
-    //   .call(function() {
-    //     this.target.remove();
-    //   });
-  }
-});
+// phina.define('Word', {
+//   superClass: 'Button',
+//
+//   init: function() {
+//     this.superInit({
+//       width: PIECE_SIZE,
+//       height: PIECE_SIZE,
+//       text: ''
+//     });
+//     this.enable = true;
+//   },
+//
+//   update: function() {
+//     this.y += 8;
+//
+//     if (this.y > 960) {
+//       this.remove();
+//     }
+//   },
+//
+//   disappear: function() {
+//     this.remove();
+//   }
+// });
 
 phina.main(function() {
 
